@@ -29,9 +29,9 @@
 
                 <jet-input id="name"
                             type="text"
-                            class="mt-1 block w-full"
+                            class="mt-4 block w-full"
                             v-model="form.name"
-                            :disabled="! permissions.canUpdateTeam" />
+                            :disabled="!permissions.canUpdateTeam" />
 
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
