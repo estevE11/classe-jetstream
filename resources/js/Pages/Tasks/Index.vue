@@ -9,7 +9,9 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <update-team-name-form :task="task" :permissions="permissions" />
-
+                <div v-for="task in 10" :key="task">
+                    <p>task</p>
+                </div>
             </div>
         </div>
     </app-layout>
