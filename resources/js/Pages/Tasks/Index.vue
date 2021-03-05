@@ -9,11 +9,11 @@
         <update-team-name-form :task="task" :permissions="permissions" />
         <div
           class="task"
-          v-for="task in tasks"
+          v-for="(task, idx) in tasks"
           :key="task"
-          :class="task.status == 0 ? 'disabled' : 'enabled'"
+          :class="forms[idx].status == 0 ? 'disabled' : 'enabled'"
         >
-          <button id="check">
+          <button id="check" @click="updateStatus(idx)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -78,11 +78,37 @@
             'availableRoles',
             'permissions',
         ],
-
         components: {
             AppLayout,
             JetSectionBorder,
         },
+        data() {
+            return {
+                forms: []
+            }
+        },
+        beforeMount() {
+            this.init();
+        },
+        methods: {
+            init() {
+                const self = this;
+                this.tasks.forEach(task => {
+                    self.forms.push(self.$inertia.form({
+                        status: task.status
+                    }));
+                });
+            },
+
+            updateStatus(i) {
+                const self = this;
+                this.forms[i].status = !this.forms[i].status;
+                this.forms[i].put(route('task.update', this.tasks[i]),
+                {
+                    errorBag: null,
+                });
+            }
+        }
     }
 </script>
 

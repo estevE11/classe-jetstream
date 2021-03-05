@@ -85,7 +85,13 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        try {
+            $task->update($request->all());        
+        } catch(\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+        
+        return $this->index($request);
     }
 
     /**
