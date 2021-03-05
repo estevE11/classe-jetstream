@@ -15,10 +15,9 @@
                         <td>Title</td>
                         <td>Description</td>
                     </tr>
-                    <tr v-for="task in 10" :key="task" >
-                        <td>task.team</td>
-                        <td>task.title</td>
-                        <td>task.description</td>
+                    <tr v-for="task in tasks" :key="task">
+                        <h3>{{task.title}}</h3>
+                        <h5>{{task.description}}</h5>
                     </tr>
                 </table>
                 
@@ -33,7 +32,7 @@
 
     export default {
         props: [
-            'task',
+            'tasks',
             'availableRoles',
             'permissions',
         ],
