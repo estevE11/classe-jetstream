@@ -25,14 +25,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/tasks', function () {
-    return Inertia::render('Tasks/Index', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/tasks', [TaskController::class, 'index']);
+/*return Inertia::render('Tasks/Index', [
+    'canLogin' => Route::has('login'),
+    'canRegister' => Route::has('register'),
+    'laravelVersion' => Application::VERSION,
+    'phpVersion' => PHP_VERSION,
+]);*/
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

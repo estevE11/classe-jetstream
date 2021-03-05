@@ -9,8 +9,9 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <update-team-name-form :task="task" :permissions="permissions" />
-                <div v-for="task in 10" :key="task">
-                    <p>task</p>
+                <div v-for="task in tasks" :key="task">
+                    <h3>{{task.title}}</h3>
+                    <h5>{{task.description}}</h5>
                 </div>
             </div>
         </div>
@@ -23,7 +24,7 @@
 
     export default {
         props: [
-            'task',
+            'tasks',
             'availableRoles',
             'permissions',
         ],
