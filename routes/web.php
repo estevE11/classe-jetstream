@@ -25,7 +25,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/tasks', [TaskController::class, 'index']);
+Route::resource('task', TaskController::class);
 /*return Inertia::render('Tasks/Index', [
     'canLogin' => Route::has('login'),
     'canRegister' => Route::has('register'),

@@ -20,7 +20,6 @@
                         <h5>{{task.description}}</h5>
                     </tr>
                 </table>
-                
             </div>
         </div>
     </app-layout>
@@ -33,6 +32,7 @@
     export default {
         props: [
             'tasks',
+            'user',
             'availableRoles',
             'permissions',
         ],

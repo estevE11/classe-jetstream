@@ -9,6 +9,8 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\DB;
+
 class TaskController extends Controller
 {
     /**
@@ -16,15 +18,18 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
+        $team_id = $request->user()->current_team_id;
+
+        $tasks = DB::table('tasks')->where('id_team', '=', $team_id)->get();
+        
         return Inertia::render('Tasks/Index', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
-            'tasks' => $tasks
+            'tasks' => $tasks,
         ]);
     }
 
