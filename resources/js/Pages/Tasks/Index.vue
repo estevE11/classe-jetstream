@@ -43,7 +43,7 @@
               />
             </svg>
           </button>
-          <button id="thrash">
+          <button id="thrash" @click="destroy(idx)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -104,6 +104,14 @@
                 const self = this;
                 this.forms[i].status = !this.forms[i].status;
                 this.forms[i].put(route('task.update', this.tasks[i]),
+                {
+                    errorBag: null,
+                });
+            },
+
+            destroy(i) {
+                const self = this;
+                this.forms[i].delete(route('task.destroy', this.tasks[i]),
                 {
                     errorBag: null,
                 });

@@ -100,8 +100,9 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(Request $request, Task $task)
     {
-        //
+        $task->delete();
+        return $this->index($request);
     }
 }
