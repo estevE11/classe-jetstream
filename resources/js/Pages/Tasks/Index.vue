@@ -151,7 +151,8 @@
   flex-direction: row;
   width: 100vh;
   height: 10vh;
-  border-radius: 2vh;
+  border-radius: 5px;
+  margin-bottom: 10px;
   align-items: center;
 }
 
@@ -256,9 +257,9 @@ button{
     margin-right: 1vh;
 }
 .enabled {
-  background-color: rgba(0, 247, 255, 0.6);
+  background-color: #eee;
 }
 .disabled {
-  background-color: rgba(255, 0, 0, 0.6);
+  background-color: #fdd;
 }
 </style>
