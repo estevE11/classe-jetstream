@@ -13,7 +13,7 @@
           :key="task"
           :class="forms[idx].status == 0 ? 'disabled' : 'enabled'"
         >
-          <button id="check" @click="updateStatus(idx)">
+          <button id="check" @click="updateStatus(idx)" :disabled="role > 1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -84,7 +84,16 @@
         },
         data() {
             return {
-                forms: []
+                forms: [],
+                currentTeamID: null,
+                role: null,
+
+                roles: {
+                    admin: 0,
+                    editor: 1,
+                    senior: 2,
+                    viewer: 3
+                }
             }
         },
         beforeMount() {
@@ -98,13 +107,27 @@
                         status: task.status
                     }));
                 });
+
+                console.log(this.$page.props.user);
+                this.currentTeamID = this.$page.props.user.current_team.id;
+                console.log(this.currentTeamID);
+                const all_teams = this.$page.props.user.all_teams;
+                console.log(all_teams);
+                for(let i = 0; i < all_teams.length; i++) {
+                    if(all_teams[i].id == this.currentTeamID) {
+                        if(!all_teams[i].membership) this.role = 0;
+                        else this.role = this.roles[all_teams[i].membership.role];                        
+                        break;
+                    }
+                }
+                console.log(this.role);
             },
 
             updateStatus(i) {
                 this.forms[i].status = !this.forms[i].status;
                 this.forms[i].put(route('task.update', this.tasks[i]),
                 {
-                    errorBag: null,
+                    errorBag: null
                 });
             },
 
@@ -192,19 +215,26 @@ button{
     margin-right: 1vh;
 }
 
+#check:disabled{
+    color: grey;
+}
+
+#check:hover:disabled{
+    color: grey;
+}
+
 #check svg{
     width: 10vh;
-    height: 8vh;   
+    height: 8vh;
 }
 
 #check{
     height: 6vh;
 }
 
-#check svg:hover {
+#check:hover {
     color: rgb(20, 199, 20);    
 }
-
 
 #title{
     height: 10vh;

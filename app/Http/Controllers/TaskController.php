@@ -51,7 +51,13 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            Task::create($request->all());
+        } catch(\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+        
+        return $this->index($request);
     }
 
     /**
@@ -85,6 +91,10 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        if(!$request->user()->can('task.update')) {
+            return $this->index($request);;
+        }
+
         try {
             $task->update($request->all());        
         } catch(\Exception $e) {
