@@ -101,7 +101,6 @@
             },
 
             updateStatus(i) {
-                const self = this;
                 this.forms[i].status = !this.forms[i].status;
                 this.forms[i].put(route('task.update', this.tasks[i]),
                 {
@@ -110,7 +109,6 @@
             },
 
             destroy(i) {
-                const self = this;
                 this.forms[i].delete(route('task.destroy', this.tasks[i]),
                 {
                     errorBag: null,
