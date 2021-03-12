@@ -92,7 +92,7 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         if(!$request->user()->can('task.update')) {
-            return $this->index($request);;
+            return $this->index($request);
         }
 
         try {
@@ -112,6 +112,10 @@ class TaskController extends Controller
      */
     public function destroy(Request $request, Task $task)
     {
+        if(!$request->user()->can('task.destroy')) {
+            return $this->index($request);
+        }
+
         $task->delete();
         return $this->index($request);
     }

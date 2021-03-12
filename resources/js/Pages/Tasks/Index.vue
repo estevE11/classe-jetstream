@@ -43,7 +43,7 @@
               />
             </svg>
           </button>
-          <button id="thrash" @click="destroy(idx)">
+          <button id="thrash" @click="destroy(idx)" :disabled="role > 0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -179,9 +179,18 @@ button{
     height: 6vh;
 }
 
-#thrash svg:hover {
+#thrash:hover {
     color: red;    
 }
+
+#thrash:disabled{
+    color: grey;
+}
+
+#thrash:hover:disabled{
+    color: grey;
+}
+
 
 #edit{
     height: 10vh;
@@ -200,10 +209,11 @@ button{
 
 #edit{
     height: 6vh;
+    color: grey;    
 }
 
 #edit svg:hover {
-    color: orange;    
+    color: grey;    
 }
 
 #check{
